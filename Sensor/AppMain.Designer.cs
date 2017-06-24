@@ -79,6 +79,10 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(97, 17);
             this.toolStripStatusLabel2.Text = "Database: Closed";
             // 
+            // serial1
+            // 
+            this.serial1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serial1_DataReceived);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -105,7 +109,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(322, 23);
             this.button2.TabIndex = 4;
-            this.button2.Text = @"Start Transferring to Database";
+            this.button2.Text = "Start Transferring to Database";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -177,7 +181,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textBox1);
             this.Name = "AppMain";
-            this.Text = string.Format("{0}",EnvironmentVariables.AppName);
+            this.Text = "TeamZ Port-Database Adapter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);

@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.MessageBoxButtons;
 using static System.Windows.Forms.MessageBoxIcon;
 using static Sensor.EnvironmentVariables;
+using  MySql.Data.MySqlClient;
 
 namespace Sensor
 {
     public partial class AppMain : Form
     {
+        private string dataReadLine;
+        MySqlConnection connection = new MySqlConnection(EnvironmentVariables.ConnectionString);
         int exiting;
         public AppMain()
         {
@@ -63,11 +67,13 @@ namespace Sensor
                 case "Start Transferring to Database":
                 {
                     StartTrans();
+                    button2.Text = "Stop Transferring";
                     break;
                 }
                 default:
                 {
                     StopTrans();
+                    button2.Text = "Start Transferring to Database";
                     break;
                 }
             }
@@ -106,12 +112,12 @@ namespace Sensor
 
         public void StartTrans()
         {
-
+            connection.Open();
         }
 
         public void StopTrans()
         {
-
+            connection.Close();
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -123,5 +129,34 @@ namespace Sensor
         {
             Debug.Print(this.Text);
         }
+
+        private void serial1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            dataReadLine = serial1.ReadLine();
+            if (connection.State == ConnectionState.Open)
+            {
+                try
+                {
+                    var splited = dataReadLine.Split(':');
+                    var commandText = $"insert into oreki values ('{timestamp().ToString()}','{splited[0]}','{splited[1]}')";
+                    var command = new MySqlCommand(commandText,connection);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.GetType().ToString()+"\n"+exception.Message.ToString());
+                }
+
+
+            }
+        }
+
+        private long timestamp()
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            long timeStamp = (long)(DateTime.Now - startTime).TotalSeconds; // 相差秒数
+            return timeStamp;
+        }
     }
 }
+
