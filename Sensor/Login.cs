@@ -42,6 +42,7 @@ namespace Sensor
             if(connection.State != ConnectionState.Closed)connection.Close();
             AppMain form2 = new AppMain();
             form2.Show();
+            form2.Text = $"{EnvironmentVariables.AppName} - [{textBox1.Text}]";
             this.Hide();
         }
 

@@ -20,11 +20,6 @@ namespace Sensor
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            this.Text = EnvironmentVariables.AppName;
-        }
-
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
 
@@ -129,11 +124,6 @@ namespace Sensor
             toolStripStatusLabel2.ForeColor = Color.Red;
         }
 
-        private void Main_Shown(object sender, EventArgs e)
-        {
-            this.Text = EnvironmentVariables.AppName;
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             Debug.Print(this.Text);
@@ -180,6 +170,11 @@ namespace Sensor
         private void button3_Click_1(object sender, EventArgs e)
         {
             textBox2.Text=String.Empty;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
         }
     }
 }
