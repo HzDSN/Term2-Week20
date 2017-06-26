@@ -81,16 +81,18 @@ namespace Sensor
 
         public void OpenPort()
         {
+            
+            try
+            {
             serial1.PortName = textBox1.Text;
             serial1.BaudRate = Convert.ToInt32(textBox3.Text);
             serial1.DataBits = 8;
-            try
-            {
                 serial1.Open();
             }
-            catch
+            catch(Exception exception)
             {
-                MessageBox.Show("Open port failed! Check your port name and baud rate.", AppName, OK, Exclamation);
+                MessageBox.Show(exception.GetType().ToString() + "\n" + exception.Message.ToString());
+                //MessageBox.Show("Open port failed! Check your port name and baud rate.", AppName, OK, Exclamation);
                 return;
             }
             toolStripStatusLabel1.ForeColor = Color.Green;
@@ -98,26 +100,33 @@ namespace Sensor
             textBox1.Enabled = false;
             textBox3.Enabled = false;
             button2.Enabled = true;
+            button1.Text = "Close";
         }
 
         public void ClosePort()
         {
             StopTrans();
+            serial1.Close();
             toolStripStatusLabel1.ForeColor = Color.Red;
             toolStripStatusLabel1.Text = "Serial Port: Closed";
             textBox1.Enabled = true;
             textBox3.Enabled = true;
             button2.Enabled = false;
+            button1.Text = "Open";
         }
 
         public void StartTrans()
         {
             connection.Open();
+            toolStripStatusLabel2.Text = "Database: Open";
+            toolStripStatusLabel2.ForeColor=Color.Green;
         }
 
         public void StopTrans()
         {
             connection.Close();
+            toolStripStatusLabel2.Text = "Database: Closed";
+            toolStripStatusLabel2.ForeColor = Color.Red;
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -132,13 +141,18 @@ namespace Sensor
 
         private void serial1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+
             dataReadLine = serial1.ReadLine();
+            textBox2.Text += dataReadLine;
+            textBox2.Text += (char)0x0a;
             if (connection.State == ConnectionState.Open)
             {
                 try
                 {
+                
+                
                     var splited = dataReadLine.Split(':');
-                    var commandText = $"insert into oreki values ('{timestamp().ToString()}','{splited[0]}','{splited[1]}')";
+                    var commandText = $"insert into oreki values ('{timestamp().ToString()}','{splited[0]}','{/*Convert.ToDouble(*/splited[1]/*)*/}')";
                     var command = new MySqlCommand(commandText,connection);
                     command.ExecuteNonQuery();
                 }
@@ -156,6 +170,16 @@ namespace Sensor
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
             long timeStamp = (long)(DateTime.Now - startTime).TotalSeconds; // 相差秒数
             return timeStamp;
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            textBox2.Text=String.Empty;
         }
     }
 }

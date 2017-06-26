@@ -21,7 +21,10 @@ namespace Sensor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ConnectionString=String.Format(@"Server={0};Port={1};Database={4};Uid={2};Pwd={3};",textBox1.Text,textBox2.Text,textBox3.Text,textBox4.Text,textBox5.Text);
+            ConnectionString=
+                $@"Server={textBox1.Text};Port={textBox2.Text};Database={textBox5.Text};Uid={textBox3.Text};Pwd={
+                    textBox4.Text
+                };";
             var connection = new MySqlConnection(ConnectionString);
             try
             {
@@ -36,6 +39,7 @@ namespace Sensor
                     MessageBoxIcon.Exclamation);
                 return;
             }
+            if(connection.State != ConnectionState.Closed)connection.Close();
             AppMain form2 = new AppMain();
             form2.Show();
             this.Hide();

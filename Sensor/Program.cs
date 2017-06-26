@@ -14,6 +14,7 @@ namespace Sensor
         [STAThread]
         static void Main()
         {
+            AppMain.CheckForIllegalCrossThreadCalls = false;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
