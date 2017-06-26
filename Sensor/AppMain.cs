@@ -145,7 +145,7 @@ namespace Sensor
                     var commandText = $"insert into oreki values ('{timestamp().ToString()}','{splited[0]}','{/*Convert.ToDouble(*/splited[1]/*)*/}')";
                     var command = new MySqlCommand(commandText,connection);
                     command.ExecuteNonQuery();
-                    listView1.Items.Add($"{DateTime.Now}: Add a record to Database.");
+                    listView1.Items.Add($"{DateTime.Now}: Add a record to Database: {dataReadLine}");
                 }
                 catch (Exception exception)
                 {
