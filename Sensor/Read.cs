@@ -10,12 +10,12 @@ using  MySql.Data.MySqlClient;
 
 namespace Sensor
 {
-    public partial class AppMain : Form
+    public partial class Read : Form
     {
         private string dataReadLine;
         MySqlConnection connection = new MySqlConnection(EnvironmentVariables.ConnectionString);
         int exiting;
-        public AppMain()
+        public Read()
         {
             InitializeComponent();
         }

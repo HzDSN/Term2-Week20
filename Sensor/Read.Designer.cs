@@ -3,7 +3,7 @@ using static Sensor.EnvironmentVariables;
 
 namespace Sensor
 {
-    partial class AppMain
+    partial class Read
     {
         /// <summary>
         /// Required designer variable.
@@ -236,9 +236,9 @@ namespace Sensor
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
-            this.Name = "AppMain";
+            this.Name = "Upload";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TeamZ Data Reader";
+            this.Text = "TeamZ Serial-Database Adapater";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.AppMain_Load);
