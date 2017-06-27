@@ -1,4 +1,7 @@
-﻿namespace Sensor
+﻿using System;
+using static Sensor.EnvironmentVariables;
+
+namespace Sensor
 {
     partial class AppMain
     {
@@ -29,212 +32,242 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.serial1 = new System.IO.Ports.SerialPort(this.components);
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListBox();
-            this.statusStrip1.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rb08Touch = new System.Windows.Forms.RadioButton();
+            this.rb07IR = new System.Windows.Forms.RadioButton();
+            this.rb06Humidity = new System.Windows.Forms.RadioButton();
+            this.rb05Light = new System.Windows.Forms.RadioButton();
+            this.rb04HeatIndexF = new System.Windows.Forms.RadioButton();
+            this.rb03HeatIndexC = new System.Windows.Forms.RadioButton();
+            this.rb02TempF = new System.Windows.Forms.RadioButton();
+            this.rb01TempC = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // dateTimePicker1
             // 
-            this.textBox1.Location = new System.Drawing.Point(124, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "COM3";
+            this.dateTimePicker1.Location = new System.Drawing.Point(75, 74);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 0;
             // 
-            // statusStrip1
+            // dateTimePicker2
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 638);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(896, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(102, 17);
-            this.toolStripStatusLabel1.Text = "Serial Port: Closed";
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(97, 17);
-            this.toolStripStatusLabel2.Text = "Database: Closed";
-            // 
-            // serial1
-            // 
-            this.serial1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serial1_DataReceived);
+            this.dateTimePicker2.Location = new System.Drawing.Point(323, 74);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker2.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 48);
+            this.label1.Location = new System.Drawing.Point(29, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Serial Port:";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(385, 43);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Open";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(467, 43);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(322, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Start Transferring to Database";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.label1.Text = "From";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 86);
+            this.label2.Location = new System.Drawing.Point(287, 80);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Serial status:";
+            this.label2.Size = new System.Drawing.Size(20, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "To";
             // 
-            // textBox2
+            // groupBox1
             // 
-            this.textBox2.Location = new System.Drawing.Point(53, 121);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(736, 223);
-            this.textBox2.TabIndex = 6;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.rb08Touch);
+            this.groupBox1.Controls.Add(this.rb07IR);
+            this.groupBox1.Controls.Add(this.rb06Humidity);
+            this.groupBox1.Controls.Add(this.rb05Light);
+            this.groupBox1.Controls.Add(this.rb04HeatIndexF);
+            this.groupBox1.Controls.Add(this.rb03HeatIndexC);
+            this.groupBox1.Controls.Add(this.rb02TempF);
+            this.groupBox1.Controls.Add(this.rb01TempC);
+            this.groupBox1.Location = new System.Drawing.Point(32, 134);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(580, 100);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Type";
             // 
-            // label3
+            // rb08Touch
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(53, 358);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Database status:";
+            this.rb08Touch.AutoSize = true;
+            this.rb08Touch.Location = new System.Drawing.Point(399, 52);
+            this.rb08Touch.Name = "rb08Touch";
+            this.rb08Touch.Size = new System.Drawing.Size(56, 17);
+            this.rb08Touch.TabIndex = 7;
+            this.rb08Touch.Text = "Touch";
+            this.rb08Touch.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // rb07IR
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 48);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Rate:";
+            this.rb07IR.AutoSize = true;
+            this.rb07IR.Location = new System.Drawing.Point(399, 19);
+            this.rb07IR.Name = "rb07IR";
+            this.rb07IR.Size = new System.Drawing.Size(36, 17);
+            this.rb07IR.TabIndex = 6;
+            this.rb07IR.Text = "IR";
+            this.rb07IR.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // rb06Humidity
             // 
-            this.textBox3.Location = new System.Drawing.Point(269, 46);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 9;
-            this.textBox3.Text = "9600";
+            this.rb06Humidity.AutoSize = true;
+            this.rb06Humidity.Location = new System.Drawing.Point(312, 52);
+            this.rb06Humidity.Name = "rb06Humidity";
+            this.rb06Humidity.Size = new System.Drawing.Size(65, 17);
+            this.rb06Humidity.TabIndex = 5;
+            this.rb06Humidity.Text = "Humidity";
+            this.rb06Humidity.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // rb05Light
             // 
-            this.button3.Location = new System.Drawing.Point(714, 92);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Clear";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.rb05Light.AutoSize = true;
+            this.rb05Light.Location = new System.Drawing.Point(312, 19);
+            this.rb05Light.Name = "rb05Light";
+            this.rb05Light.Size = new System.Drawing.Size(48, 17);
+            this.rb05Light.TabIndex = 4;
+            this.rb05Light.Text = "Light";
+            this.rb05Light.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // rb04HeatIndexF
             // 
-            this.button4.Location = new System.Drawing.Point(714, 353);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Clear";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.rb04HeatIndexF.AutoSize = true;
+            this.rb04HeatIndexF.Location = new System.Drawing.Point(190, 53);
+            this.rb04HeatIndexF.Name = "rb04HeatIndexF";
+            this.rb04HeatIndexF.Size = new System.Drawing.Size(90, 17);
+            this.rb04HeatIndexF.TabIndex = 3;
+            this.rb04HeatIndexF.Text = "HeatIndex(*F)";
+            this.rb04HeatIndexF.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // rb03HeatIndexC
             // 
-            this.listView1.FormattingEnabled = true;
-            this.listView1.Location = new System.Drawing.Point(53, 400);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(736, 225);
-            this.listView1.TabIndex = 13;
+            this.rb03HeatIndexC.AutoSize = true;
+            this.rb03HeatIndexC.Location = new System.Drawing.Point(190, 20);
+            this.rb03HeatIndexC.Name = "rb03HeatIndexC";
+            this.rb03HeatIndexC.Size = new System.Drawing.Size(91, 17);
+            this.rb03HeatIndexC.TabIndex = 2;
+            this.rb03HeatIndexC.Text = "HeatIndex(*C)";
+            this.rb03HeatIndexC.UseVisualStyleBackColor = true;
+            // 
+            // rb02TempF
+            // 
+            this.rb02TempF.AutoSize = true;
+            this.rb02TempF.Location = new System.Drawing.Point(43, 53);
+            this.rb02TempF.Name = "rb02TempF";
+            this.rb02TempF.Size = new System.Drawing.Size(101, 17);
+            this.rb02TempF.TabIndex = 1;
+            this.rb02TempF.Text = "Temperature(*F)";
+            this.rb02TempF.UseVisualStyleBackColor = true;
+            // 
+            // rb01TempC
+            // 
+            this.rb01TempC.AutoSize = true;
+            this.rb01TempC.Checked = true;
+            this.rb01TempC.Location = new System.Drawing.Point(43, 20);
+            this.rb01TempC.Name = "rb01TempC";
+            this.rb01TempC.Size = new System.Drawing.Size(102, 17);
+            this.rb01TempC.TabIndex = 0;
+            this.rb01TempC.TabStop = true;
+            this.rb01TempC.Text = "Temperature(*C)";
+            this.rb01TempC.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(256, 538);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Show";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(32, 241);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(538, 280);
+            this.dataGridView1.TabIndex = 7;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(457, 20);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(51, 17);
+            this.radioButton1.TabIndex = 8;
+            this.radioButton1.Text = "Other";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(504, 20);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(70, 20);
+            this.textBox1.TabIndex = 9;
             // 
             // AppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 660);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(624, 593);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.dateTimePicker1);
             this.Name = "AppMain";
-            this.Text = "TeamZ Port-Database Adapter";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "TeamZ Data Reader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.Load += new System.EventHandler(this.AppMain_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.IO.Ports.SerialPort serial1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListBox listView1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rb06Humidity;
+        private System.Windows.Forms.RadioButton rb05Light;
+        private System.Windows.Forms.RadioButton rb04HeatIndexF;
+        private System.Windows.Forms.RadioButton rb03HeatIndexC;
+        private System.Windows.Forms.RadioButton rb02TempF;
+        private System.Windows.Forms.RadioButton rb01TempC;
+        private System.Windows.Forms.RadioButton rb08Touch;
+        private System.Windows.Forms.RadioButton rb07IR;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

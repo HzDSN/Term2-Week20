@@ -1,4 +1,6 @@
-﻿namespace Sensor
+﻿using System;
+
+namespace Sensor
 {
     partial class Login
     {
@@ -181,7 +183,7 @@
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TeamZ Port-Database Adapter";
+            this.Text = string.Format("{0}", EnvironmentVariables.AppName);
             this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

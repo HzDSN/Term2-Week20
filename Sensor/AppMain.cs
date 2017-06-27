@@ -44,138 +44,78 @@ namespace Sensor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            switch (button1.Text)
-            {
-                case "Open":
-                    OpenPort();
-                    break;
-                default:
-                    ClosePort();
-                    break;
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            switch (button2.Text)
-            {
-                case "Start Transferring to Database":
-                {
-                    StartTrans();
-                    button2.Text = "Stop Transferring";
-                    break;
-                }
-                default:
-                {
-                    StopTrans();
-                    button2.Text = "Start Transferring to Database";
-                    break;
-                }
-            }
-        }
-
-        public void OpenPort()
-        {
+            //check_chk();
+            if(connection.State!=ConnectionState.Open)connection.Open();
             
-            try
+            string commandText =
+                $"select * from oreki where timestamp >= {timestamp(dateTimePicker1.Value)} and timestamp <= {timestamp(dateTimePicker2.Value)}";
+            string newCommandText = string.Empty;
+            if (rb01TempC.Checked)
             {
-            serial1.PortName = textBox1.Text;
-            serial1.BaudRate = Convert.ToInt32(textBox3.Text);
-            serial1.DataBits = 8;
-                serial1.Open();
+                newCommandText = commandText + $" and sensor_type = 'TempC'";
             }
-            catch(Exception exception)
+            else if (rb02TempF.Checked)
             {
-                MessageBox.Show(exception.GetType().ToString() + "\n" + exception.Message.ToString());
-                //MessageBox.Show("Open port failed! Check your port name and baud rate.", AppName, OK, Exclamation);
-                return;
+                newCommandText = commandText + $" and sensor_type = 'TempF'";
             }
-            toolStripStatusLabel1.ForeColor = Color.Green;
-            toolStripStatusLabel1.Text = $"Serial Port: {textBox1.Text}";
-            textBox1.Enabled = false;
-            textBox3.Enabled = false;
-            button2.Enabled = true;
-            button1.Text = "Close";
-        }
-
-        public void ClosePort()
-        {
-            StopTrans();
-            serial1.Close();
-            toolStripStatusLabel1.ForeColor = Color.Red;
-            toolStripStatusLabel1.Text = "Serial Port: Closed";
-            textBox1.Enabled = true;
-            textBox3.Enabled = true;
-            button2.Enabled = false;
-            button1.Text = "Open";
-        }
-
-        public void StartTrans()
-        {
-            connection.Open();
-            toolStripStatusLabel2.Text = "Database: Open";
-            toolStripStatusLabel2.ForeColor=Color.Green;
-        }
-
-        public void StopTrans()
-        {
-            connection.Close();
-            toolStripStatusLabel2.Text = "Database: Closed";
-            toolStripStatusLabel2.ForeColor = Color.Red;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Debug.Print(this.Text);
-        }
-
-        private void serial1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-
-            dataReadLine = serial1.ReadLine();
-            textBox2.Text += dataReadLine;
-            textBox2.Text += (char)0x0a;
-            if (connection.State == ConnectionState.Open)
+            else if(rb03HeatIndexC.Checked)
             {
-                try
-                {
-                
-                
-                    var splited = dataReadLine.Split(':');
-                    var commandText = $"insert into oreki values ('{timestamp().ToString()}','{splited[0]}','{/*Convert.ToDouble(*/splited[1]/*)*/}')";
-                    var command = new MySqlCommand(commandText,connection);
-                    command.ExecuteNonQuery();
-                    listView1.Items.Add($"{DateTime.Now}: Add a record to Database: {dataReadLine}");
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.GetType().ToString()+"\n"+exception.Message.ToString());
-                }
-
-
+                newCommandText = commandText + $" and sensor_type = 'HeatIndexC'";
             }
+            else if (rb04HeatIndexF.Checked)
+            {
+                newCommandText = commandText + $" and sensor_type = 'HeatIndexF'";
+            }
+            else if(rb05Light.Checked)
+            {
+                newCommandText = commandText + $" and sensor_type = 'GY30'";
+            }
+            else if(rb06Humidity.Checked)
+            {
+                newCommandText = commandText + $" and sensor_type = 'Humidity'";
+            }
+            else if(rb07IR.Checked)
+            {
+                newCommandText = commandText + $" and sensor_type = 'IRSensor'";
+            }
+            else if(rb08Touch.Checked)
+            {
+                newCommandText = commandText + $" and sensor_type = 'TouchSensor'";
+            }
+            
+            MySqlDataAdapter dataAdapter=new MySqlDataAdapter(newCommandText,ConnectionString);
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet, "timestamp");
+            dataGridView1.DataSource = dataSet;
+            dataGridView1.DataMember = "timestamp";
+            dataGridView1.Columns[0].DataPropertyName = dataSet.Tables[0].Columns[0].ToString();
+            dataAdapter.Fill(dataSet, "sensor_type");
+            dataGridView1.DataSource = dataSet;
+            dataGridView1.DataMember = "sensor_type";
+            dataGridView1.Columns[1].DataPropertyName = dataSet.Tables[1].Columns[1].ToString();
+            dataAdapter.Fill(dataSet, "value");
+            dataGridView1.DataSource = dataSet;
+            dataGridView1.DataMember = "value";
+            dataGridView1.Columns[2].DataPropertyName = dataSet.Tables[2].Columns[2].ToString();
+
         }
 
-        private long timestamp()
+        private void AppMain_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.MaxDate = DateTime.Now;
+            dateTimePicker2.MaxDate = DateTime.Now;
+        }
+
+        public string timestamp(DateTime time)
         {
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
-            long timeStamp = (long)(DateTime.Now - startTime).TotalSeconds; // 相差秒数
-            return timeStamp;
+            long timeStamp = (long)(time - startTime).TotalSeconds; // 相差秒数
+            return timeStamp.ToString();
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            textBox2.Text=String.Empty;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            listView1.Items.Clear();
+            textBox1.Enabled = radioButton1.Checked;
         }
     }
 }
